@@ -1,0 +1,80 @@
+# Activity Blog 02 – Milestone 2
+
+## Progress Entry 1 – Planning & Task Assignment
+
+**Date:** Monday, June 22, 2026
+
+### Attendees
+
+* Harbir Bains
+* Karan Goel
+* Diwan Bhangal
+* Joleene Ismael
+* Soniya Dasadia
+* Raeya Sangha
+* Alfonso Diaz
+* Mina Mansour
+* Haider Waheed
+
+### Work Completed
+
+* Reviewed the Milestone 2 deliverables and grading rubric.
+* Assigned responsibilities to each team member.
+* Updated the GitHub Project (Kanban) board.
+* Continued using project documentation to track development.
+* Confirmed development would follow the wireframes and data planning completed during Milestone 1.
+
+### Decisions Made
+
+* Continue using Discord for team communication.
+* Continue using Google Docs for task coordination.
+* Continue using the existing GitHub repository, Project board, and documentation.
+
+### Blocker / Resolution
+
+**Blocker:** The Backend Skeleton role had not yet been assigned.
+
+**Resolution:** The role will be assigned before backend development begins.
+
+---
+
+## Team Responsibilities
+
+| Team Member    | Responsibility                                           |
+| -------------- | -------------------------------------------------------- |
+| Diwan Bhangal  | Front-End – Dashboard Page                               |
+| Joleene Ismael | Front-End – Modals, Expenses, Transactions & Savings     |
+| Soniya Dasadia | Front-End – Loading Page & Get Started Page              |
+| Karan Goel     | SQL Implementation                                       |
+| Raeya Sangha   | ER Diagram                                               |
+| Alfonso Diaz   | Database Schema Quality, Normalization & SQL Correctness |
+| Haider Waheed  | Front-End QA & Error Handling                            |
+| Joleene Ismael | Backend Skeleton                                         |
+| Mina Mansour   | GitHub Project (Kanban)                                  |
+| Harbir Bains   | Activity Blog / Wiki Documentation                       |
+
+---
+
+## Progress Entry 2 – Development Progress
+
+**Date:** Saturday, June 27, 2026
+
+### Work Completed
+
+* Dashboard page development has begun.
+* Loading Page and Get Started Page implementation is underway.
+* Development of the Expenses, Transactions, Modals, and Savings pages has started.
+* Database schema and ER diagram development are in progress.
+* SQL table creation has begun.
+* GitHub Project board and documentation have been updated to reflect current progress.
+
+### Decisions Made
+
+* Continue updating documentation throughout development.
+* Team members will communicate implementation changes through Discord before making significant modifications.
+
+### Blocker / Resolution
+
+**Blocker:** Minor implementation questions arose regarding integration between project components.
+
+**Resolution:** Team members discussed the questions through Discord and agreed on the implementation approach before continuing development.

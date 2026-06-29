@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sprout Dashboard</title>
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+    <nav>
+        <div class="brand">
+            <img src="assets/smaller-logo.png" class="nav-logo" alt="Sprout">
+        </div>
+        <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="index.html">Logout</a></li>
+        </ul>
+    </nav>
+
+    <div class="dashboard">
+        <h2>Welcome, Username!</h2>
+
+        <section class="overview">
+            <div class="section-title">OVERVIEW</div>
+            <div class="budget-range">
+                <label>Budget Period</label>
+                <input type="date">
+                <span>—</span>
+                <input type="date">
+            </div>
+            <div class="stats">
+                <div class="stat-card">
+                    <h4>Balance Remaining</h4>
+                    <h2 id="balance-remaining">$0.00</h2>
+                </div>
+                <div class="stat-card">
+                    <h4>Total Spent</h4>
+                    <h2 id="total-spent">$0.00</h2>
+                </div>
+                <div class="stat-card">
+                    <h4>Total Saved</h4>
+                    <h2 id="total-saved">$0.00</h2>
+                </div>
+            </div>
+        </section>
+
+        <div class="tables">
+
+            <!-- Expenses -->
+            <section class="table-card">
+                <div class="table-header">
+                    <h3>Expenses</h3>
+                    <div>
+                        <button onclick="openExpenseModal()">Add</button>
+                        <button onclick="openExpenseFilter()">Filter</button>
+                    </div>
+                </div>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Due</th>
+                            <th>Category</th>
+                            <th>Budget</th>
+                            <th>Actual</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody id="expenses-tbody"></tbody>
+                </table>
+            </section>
+
+            <!-- Transactions -->
+            <section class="table-card">
+                <div class="table-header">
+                    <h3>Transactions</h3>
+                    <div>
+                        <button onclick="openTransactionModal()">Add</button>
+                        <button onclick="openTransactionFilter()">Filter</button>
+                    </div>
+                </div>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Date</th>
+                            <th>Category</th>
+                            <th>Name</th>
+                            <th>Amount</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody id="transactions-tbody"></tbody>
+                </table>
+            </section>
+
+            <!-- Savings -->
+            <section class="savings-card">
+                <div class="savings-header">
+                    <h3>Savings</h3>
+                    <div>
+                        <button onclick="openSavingsModal()">Add</button>
+                    </div>
+                </div>
+                <div id="savings-container"></div>
+            </section>
+
+        </div>
+    </div>
+
+
+    <!-- Expenses modal -->
+    <div class="modal-overlay" id="expenses-modal">
+        <div class="modal">
+            <div class="modal-header">
+                <h2>Add expense</h2>
+                <button class="btn-close" onclick="closeModal('expenses-modal')">&times;</button>
+            </div>
+            <form id="expenses-form">
+                <div class="field">
+                    <label for="expense-date">Due date</label>
+                    <input type="date" id="expense-date" required />
+                </div>
+                <div class="field">
+                    <label for="expense-category">Category</label>
+                    <input type="text" id="expense-category" placeholder="e.g. Rent, Groceries, Utilities" required />
+                </div>
+                <div class="field">
+                    <label for="expense-budget">Budget amount ($)</label>
+                    <input type="number" id="expense-budget" placeholder="0.00" min="0.01" step="0.01" required />
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn-cancel" onclick="closeModal('expenses-modal')">Cancel</button>
+                    <button type="submit" class="btn-submit">Add expense</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Expense filter modal -->
+    <div class="modal-overlay" id="expense-filter-modal">
+        <div class="modal">
+            <div class="modal-header">
+                <h2>Filter expenses</h2>
+                <button class="btn-close" onclick="closeModal('expense-filter-modal')">&times;</button>
+            </div>
+            <div class="field">
+                <label>Date from</label>
+                <input type="date" id="ef-date-from" />
+            </div>
+            <div class="field">
+                <label>Date to</label>
+                <input type="date" id="ef-date-to" />
+            </div>
+            <div class="field">
+                <label>Category</label>
+                <select id="ef-category"></select>
+            </div>
+            <div class="field">
+                <label>Min budget ($)</label>
+                <input type="number" id="ef-min" placeholder="0.00" min="0" step="0.01" />
+            </div>
+            <div class="field">
+                <label>Max budget ($)</label>
+                <input type="number" id="ef-max" placeholder="0.00" min="0" step="0.01" />
+            </div>
+            <div class="field">
+                <label>Sort by amount</label>
+                <select id="ef-sort">
+                    <option value="">No sort</option>
+                    <option value="low">Low to high</option>
+                    <option value="high">High to low</option>
+                </select>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn-cancel" onclick="clearExpenseFilter()">Clear</button>
+                <button type="button" class="btn-submit" onclick="applyExpenseFilter()">Apply</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Transactions modal -->
+    <div class="modal-overlay" id="transactions-modal">
+        <div class="modal">
+            <div class="modal-header">
+                <h2>Add transaction</h2>
+                <button class="btn-close" onclick="closeModal('transactions-modal')">&times;</button>
+            </div>
+            <form id="transactions-form">
+                <div class="field">
+                    <label for="transaction-date">Date</label>
+                    <input type="date" id="transaction-date" required />
+                </div>
+                <div class="field">
+                    <label for="transaction-category">Category</label>
+                    <select id="transaction-category" required></select>
+                </div>
+                <div class="field">
+                    <label for="transaction-name">Name</label>
+                    <input type="text" id="transaction-name" placeholder="e.g. Costco, Netflix" required />
+                </div>
+                <div class="field">
+                    <label for="transaction-amount">Amount ($)</label>
+                    <input type="number" id="transaction-amount" placeholder="0.00" min="0.01" step="0.01" required />
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn-cancel" onclick="closeModal('transactions-modal')">Cancel</button>
+                    <button type="submit" class="btn-submit">Add transaction</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Transaction filter modal -->
+    <div class="modal-overlay" id="transaction-filter-modal">
+        <div class="modal">
+            <div class="modal-header">
+                <h2>Filter transactions</h2>
+                <button class="btn-close" onclick="closeModal('transaction-filter-modal')">&times;</button>
+            </div>
+            <div class="field">
+                <label>Date from</label>
+                <input type="date" id="tf-date-from" />
+            </div>
+            <div class="field">
+                <label>Date to</label>
+                <input type="date" id="tf-date-to" />
+            </div>
+            <div class="field">
+                <label>Category</label>
+                <select id="tf-category"></select>
+            </div>
+            <div class="field">
+                <label>Min amount ($)</label>
+                <input type="number" id="tf-min" placeholder="0.00" min="0" step="0.01" />
+            </div>
+            <div class="field">
+                <label>Max amount ($)</label>
+                <input type="number" id="tf-max" placeholder="0.00" min="0" step="0.01" />
+            </div>
+            <div class="field">
+                <label>Sort by amount</label>
+                <select id="tf-sort">
+                    <option value="">No sort</option>
+                    <option value="low">Low to high</option>
+                    <option value="high">High to low</option>
+                </select>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn-cancel" onclick="clearTransactionFilter()">Clear</button>
+                <button type="button" class="btn-submit" onclick="applyTransactionFilter()">Apply</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Savings modal -->
+    <div class="modal-overlay" id="savings-modal">
+        <div class="modal">
+            <div class="modal-header">
+                <h2>Add savings goal</h2>
+                <button class="btn-close" onclick="closeModal('savings-modal')">&times;</button>
+            </div>
+            <form id="savings-form">
+                <div class="field">
+                    <label for="savings-name">Savings goal</label>
+                    <input type="text" id="savings-name" placeholder="e.g. Vacation, Emergency fund" required />
+                </div>
+                <div class="field">
+                    <label for="savings-target">Target amount ($)</label>
+                    <input type="number" id="savings-target" placeholder="0.00" min="0.01" step="0.01" required />
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn-cancel" onclick="closeModal('savings-modal')">Cancel</button>
+                    <button type="submit" class="btn-submit">Add goal</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Add Money modal -->
+    <div class="modal-overlay" id="add-money-modal">
+        <div class="modal">
+            <div class="modal-header">
+                <h2>Add money</h2>
+                <button class="btn-close" onclick="closeModal('add-money-modal')">&times;</button>
+            </div>
+            <form id="add-money-form">
+                <div class="field">
+                    <label for="add-money-amount">Amount ($)</label>
+                    <input type="number" id="add-money-amount" placeholder="0.00" min="0.01" step="0.01" required />
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn-cancel" onclick="closeModal('add-money-modal')">Cancel</button>
+                    <button type="submit" class="btn-submit">Add money</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="js/storage.js"></script>
+    <script src="js/modal.js"></script>
+    <script src="js/savings.js"></script>
+    <script src="js/expenses.js"></script>
+    <script src="js/transactions.js"></script>
+
+</body>
+</html>

@@ -31,7 +31,7 @@ A personal budget tracking web app that helps users manage expenses, transaction
 ```
 2. Open the project folder in VS Code
 3. Install the Live Server extension
-4. Right-click `dashboard.html` and select **Open with Live Server**
+4. Right-click `index.html` and select **Open with Live Server**
 
 ## How to Run (Back-end)
 1. Navigate to the backend folder:

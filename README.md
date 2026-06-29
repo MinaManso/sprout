@@ -27,7 +27,7 @@ A personal budget tracking web app that helps users manage expenses, transaction
 ## How to Run (Front-end)
 1. Clone the repository:
 ```bash
-   git clone git https://github.com/MinaManso/sprout.git
+   git clone https://github.com/MinaManso/sprout.git
 ```
 2. Open the project folder in VS Code
 3. Install the Live Server extension
